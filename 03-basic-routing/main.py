@@ -15,19 +15,21 @@ app = FastAPI()
 def root():
 	return inventory
 
-@app.get("/items/{id}")
+@app.get("/items/{id}/")
 def get_item(id: int):
 	return inventory[id]
 
 @app.post("/items/")
 def create_item(item: Item):
 	inventory[len(inventory)+1] = item.dict()
-	# return inventory?
+	return inventory
 
 @app.put("/items/{id}/")
 def update_item(id: int, item: Item):
 	inventory[id] = item.dict()
+	return inventory
 
 @app.delete("/items/{id}/")
 def delete_item(id: int):
 	del inventory[id]
+	return inventory
